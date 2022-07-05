@@ -7,6 +7,7 @@ fn main() {
     // println!("{:?}", ttt);
     ttt.select('o', (1, 1));
     println!("{:?}", ttt);
+    ttt.show();
 }
 
 #[derive(Debug)]
@@ -45,10 +46,11 @@ impl Tictactoe {
         }
     }
     pub fn show(&mut self) {
-        for h in self.height {
-            for w in self.width {
-                println!("_");
+        for _h in 0..self.height {
+            for _w in 0..self.width {
+                print!("[ ]");
             }
+            println!("");
         }
     }
 }
