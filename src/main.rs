@@ -1,3 +1,52 @@
+use std::collections::HashSet;
+
+type Position = (usize, usize);
+
 fn main() {
-    println!("Hello, world!");
+    let mut ttt = Tictactoe::new(3, 3);
+    // println!("{:?}", ttt);
+    Tictactoe::select(&mut ttt, 'x', (1, 2));
+    println!("{:?}", ttt);
 }
+
+#[derive(Debug)]
+struct Tictactoe {
+    width: usize,
+    height: usize,
+    occup_fields: HashSet<Position>,
+    x_fields: HashSet<Position>,
+    y_fields: HashSet<Position>,
+}
+
+impl Tictactoe {
+    pub fn new(width: usize, height: usize) -> Tictactoe {
+        Tictactoe {
+            width,
+            height,
+            occup_fields: HashSet::new(),
+            x_fields: HashSet::new(),
+            y_fields: HashSet::new(),
+        }
+    }
+    pub fn select(&mut self, x_or_y: char, pos: Position) {
+        if self.width >= pos.0 && self.height <= pos.1 {
+            if !self.occup_fields.contains(&pos) {
+                if x_or_y == 'x' {
+                    self.x_fields.insert(pos);
+                } else if x_or_y == 'y' {
+                    self.y_fields.insert(pos);
+                } else {
+                    panic!("Type x or y!")
+                }
+            }
+            self.occup_fields.insert(pos);
+        }
+    }
+}
+
+// #[test]
+// fn test() {
+//     let ttt = Tictactoe::new(3, 3);
+//     println!("{:?}", ttt);
+//     println!("HEY IM HERE");
+// }
