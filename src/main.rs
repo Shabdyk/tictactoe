@@ -49,11 +49,11 @@ impl Tictactoe {
     pub fn show(&mut self) {
         for h in 0..self.height {
             for w in 0..self.width {
-                for i in &self.occup_fields{
+                for i in &self.occup_fields {
                     if w == i.0 && h ==i.1 {
-                        if self.x_fields.contains(&(w,h)){
+                        if self.x_fields.contains(&(w,h)) {
                             print!("[X]");
-                        } else{
+                        } else {
                             print!("[O]")
                         }
                     } else {
