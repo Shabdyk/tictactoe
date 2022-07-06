@@ -7,7 +7,8 @@ fn main() {
     let mut ttt = Tictactoe::new(3, 3);
     // println!("{:?}", ttt);
     ttt.select('x', (0, 2));
-    ttt.select('o', (0, 1));
+    ttt.select('x', (0, 1));
+    ttt.select('x', (2, 1));
     ttt.select('x', (0, 0));
     println!("{:?}", ttt);
     ttt.show();
@@ -17,9 +18,9 @@ fn main() {
 struct Tictactoe {
     width: usize,
     height: usize,
-    occup_fields: HashSet < Position >,
-    x_fields: HashSet < Position >,
-    o_fields: HashSet < Position >,
+    occup_fields: HashSet<Position>,
+    x_fields: HashSet<Position>,
+    o_fields: HashSet<Position>,
 }
 
 impl Tictactoe {
@@ -37,6 +38,9 @@ impl Tictactoe {
             if !self.occup_fields.contains(&pos) {
                 if x_or_o == 'x' {
                     self.x_fields.insert(pos);
+                    if self.win(self.x_fields.clone()) {
+                        println!("X win!")
+                    }
                 } else if x_or_o == 'o' {
                     self.o_fields.insert(pos);
                 } else {
@@ -51,20 +55,29 @@ impl Tictactoe {
         }
     }
     pub fn show(&mut self) {
-        for w in 0..self.width {
-            for h in 0..self.height {
-                if self.occup_fields.contains(&(w, h)) {
-                    if self.x_fields.contains(&(w, h)) {
-                        print!("[.X.]");
-                    } else {
-                        print!("[.O.]");
+        for h in 0..self.width {
+            for w in 0..self.height {
+                if self.occup_fields.contains(&(h, w)) {
+                    if self.x_fields.contains(&(h, w)) {
+                        print!("[ X ]");
+                    } else if self.o_fields.contains(&(h, w)) {
+                        print!("[ O ]");
                     }
                 } else {
-                    print!("[{}{}]", h, w);
+                    print!("[{} {}]", h, w);
                 }
             }
             println!("");
         }
+    }
+    fn win(&mut self, chk: HashSet<Position>) -> bool {
+        //Horizontal
+        let mut chk_h = Vec::new();
+        for p in chk {
+            &chk_h.push(p.0);
+        }
+        println!("{:?}", &chk_h);
+        true
     }
 }
 
