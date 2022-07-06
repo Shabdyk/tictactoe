@@ -6,9 +6,9 @@ type Position = (usize, usize);
 fn main() {
     let mut ttt = Tictactoe::new(3, 3);
     // println!("{:?}", ttt);
-    ttt.select('x', (2, 2));
-    ttt.select('o', (2, 1));
-    ttt.select('x', (2, 0));
+    ttt.select('x', (0, 2));
+    ttt.select('o', (0, 1));
+    ttt.select('x', (0, 0));
     println!("{:?}", ttt);
     ttt.show();
 }
@@ -23,7 +23,7 @@ struct Tictactoe {
 }
 
 impl Tictactoe {
-    pub fn new(width: usize, height: usize) -> Tictactoe {
+    pub fn new(height: usize, width: usize) -> Tictactoe {
         Tictactoe {
             width,
             height,
@@ -44,20 +44,20 @@ impl Tictactoe {
                 }
                 self.occup_fields.insert(pos);
             } else {
-                panic!("Position occupied!");
+                panic!("Field occupied!");
             }
         } else {
             panic!("Position out of range!")
         }
     }
     pub fn show(&mut self) {
-        for h in 0..self.height {
-            for w in 0..self.width {
+        for w in 0..self.width {
+            for h in 0..self.height {
                 if self.occup_fields.contains(&(w, h)) {
                     if self.x_fields.contains(&(w, h)) {
-                        print!("[X]");
+                        print!("[.X.]");
                     } else {
-                        print!("[O]");
+                        print!("[.O.]");
                     }
                 } else {
                     print!("[{}{}]", h, w);
