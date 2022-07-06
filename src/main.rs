@@ -1,12 +1,12 @@
 use std::collections::HashSet;
-use itertools::izip;
+//use itertools::izip;
 
 type Position = (usize, usize);
 
 fn main() {
     let mut ttt = Tictactoe::new(3, 3);
     // println!("{:?}", ttt);
-    ttt.select('o', (1, 1));
+    ttt.select('x', (2, 2));
     println!("{:?}", ttt);
     ttt.show();
 }
@@ -48,8 +48,8 @@ impl Tictactoe {
     }
     pub fn show(&mut self) {
         for h in 0..self.height {
-            for (w,i) in izip!(0..self.width,&self.occup_fields) {
-          
+            for w in 0..self.width {
+                for i in &self.occup_fields{
                     if w == i.0 && h ==i.1 {
                         if self.x_fields.contains(&(w,h)){
                             print!("[X]");
@@ -57,8 +57,9 @@ impl Tictactoe {
                             print!("[O]")
                         }
                     } else {
-                        print!("[_]");
+                        print!("[  ]");
                     }
+                }
                
             }
             println!("");
