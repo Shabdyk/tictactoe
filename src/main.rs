@@ -38,9 +38,10 @@ impl Tictactoe {
             if !self.occup_fields.contains(&pos) {
                 if x_or_o == 'x' {
                     self.x_fields.insert(pos);
-                    if self.win(self.x_fields.clone()) {
-                        println!("X win!")
-                    }
+                    self.win(self.x_fields.clone());
+                    // if self.win(self.x_fields.clone()) {
+                    //     println!("X won!")
+                    // };
                 } else if x_or_o == 'o' {
                     self.o_fields.insert(pos);
                 } else {
@@ -70,14 +71,16 @@ impl Tictactoe {
             println!("");
         }
     }
-    fn win(&mut self, chk: HashSet<Position>) -> bool {
+    fn win(&mut self, chk: HashSet<Position>) {
         //Horizontal
         let mut chk_h = Vec::new();
         for p in chk {
-            &chk_h.push(p.0);
+            chk_h.push(p.0);
+            // chk_h.iter().filter(|&n| *n == p.0).count() == 3;
+            println!("{:?}", chk_h.iter().filter(|&n| *n == p.0).count() == 3);
+            println!("{:?}", &chk_h);
         }
-        println!("{:?}", &chk_h);
-        true
+        // true
     }
 }
 
