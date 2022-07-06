@@ -57,7 +57,7 @@ impl Tictactoe {
                             print!("[O]")
                         }
                     } else {
-                        print!("[  ]");
+                        print!("[{}{}]",h,w);
                     }
                 }
                
