@@ -83,18 +83,6 @@ impl Tictactoe {
         println!("____________________")
     }
     fn win(&mut self, chk: HashSet<Position>) -> bool {
-        //Horizontal/Vertical for 3x3
-        // let mut chk_h = Vec::new();
-        // let mut chk_v = Vec::new();
-        // let mut bools = Vec::new();
-        // for p in chk {
-        //     chk_h.push(p.0);
-        //     chk_v.push(p.1);
-        //     bools.push(chk_h.iter().filter(|&n| *n == p.0).count() == 3);
-        //     bools.push(chk_v.iter().filter(|&n| *n == p.1).count() == 3);
-        // }
-        // bools.contains(&true)
-        //
         //Horizontal/Vertical for nxm
         let mut res_h = false;
         let mut res_v = false;
@@ -115,9 +103,7 @@ impl Tictactoe {
             if res_v || res_h || res_d {
                 break;
             }
-            // println!("{}/{}", n, m);
         }
-        // println!("{:?} -> {}, {}, {}", chk, res_h, res_v, res_d);
         res_h || res_v || res_d
     }
 }
