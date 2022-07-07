@@ -6,17 +6,17 @@ type Position = (usize, usize);
 fn main() {
     let mut ttt = Tictactoe::new(10, 10);
     // println!("{:?}", ttt);
-    ttt.select('o', (1, 3));
-    ttt.show();
-    ttt.select('o', (1, 4));
-    ttt.show();
-    ttt.select('x', (7, 1));
-    ttt.select('o', (1, 2));
-    ttt.show();
-    ttt.select('o', (1, 5));
-    ttt.select('o', (1, 6));
+    ttt.select('x', (1, 3));
+    // ttt.show();
+    ttt.select('x', (1, 4));
+    // ttt.show();
+    ttt.select('o', (7, 1));
+    ttt.select('x', (1, 2));
+    // ttt.show();
+    ttt.select('x', (1, 5));
+    ttt.select('x', (1, 6));
     // println!("{:?}", ttt);
-    ttt.show();
+    // ttt.show();
 }
 
 #[derive(Debug)]
@@ -62,6 +62,7 @@ impl Tictactoe {
         } else {
             panic!("Position out of range!")
         }
+        self.show();
     }
     pub fn show(&mut self) {
         for h in 0..self.width {
