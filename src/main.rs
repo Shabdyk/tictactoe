@@ -6,10 +6,10 @@ type Position = (usize, usize);
 fn main() {
     let mut ttt = Tictactoe::new(3, 3);
     // println!("{:?}", ttt);
-    ttt.select('x', (0, 2));
-    ttt.select('x', (0, 1));
-    ttt.select('x', (2, 1));
-    ttt.select('x', (0, 0));
+    ttt.select('o', (0, 2));
+    ttt.select('o', (0, 1));
+    ttt.select('o', (2, 1));
+    ttt.select('o', (0, 0));
     println!("{:?}", ttt);
     ttt.show();
 }
@@ -38,12 +38,15 @@ impl Tictactoe {
             if !self.occup_fields.contains(&pos) {
                 if x_or_o == 'x' {
                     self.x_fields.insert(pos);
-                    self.win(self.x_fields.clone());
-                    // if self.win(self.x_fields.clone()) {
-                    //     println!("X won!")
-                    // };
+                    //self.win(self.x_fields.clone());
+                    if self.win(self.x_fields.clone()) {
+                         println!("X won!")
+                    };
                 } else if x_or_o == 'o' {
                     self.o_fields.insert(pos);
+                       if self.win(self.o_fields.clone()) {
+                         println!("O won!")
+                         }
                 } else {
                     panic!("Type x or o!")
                 }
@@ -71,15 +74,20 @@ impl Tictactoe {
             println!("");
         }
     }
-    fn win(&mut self, chk: HashSet<Position>) {
+    fn win(&mut self, chk: HashSet<Position>) -> bool {
         //Horizontal
         let mut chk_h = Vec::new();
+        let mut bo_h = Vec::new();
         for p in chk {
             chk_h.push(p.0);
-            // chk_h.iter().filter(|&n| *n == p.0).count() == 3;
-            println!("{:?}", chk_h.iter().filter(|&n| *n == p.0).count() == 3);
-            println!("{:?}", &chk_h);
+            bo_h.push(chk_h.iter().filter(|&n| *n == p.0).count() == 3);
+            //println!("{:?}", chk_h.iter().filter(|&n| *n == p.0).count() == 3);
+            //println!("{:?}", &chk_h);
+            
         }
+        
+        bo_h.contains(&true)
+        
         // true
     }
 }
